@@ -1,4 +1,4 @@
-package com.codepath.tvshowapp
+package com.cs4750.tvshowapp
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,75 +6,51 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.codepath.tvshowapp.R.id
+import com.cs4750.tvshowapp.R.id
 
-/**
- * [RecyclerView.Adapter] that can display a [Movies] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- */
+
 class MoviesRecyclerViewAdapter(
-    private val books: List<Movies>,
-    private val mListener: OnListFragmentInteractionListener?
+    private val movies: List<Movies>,
+    private val mListener: OnListFragmentMoviesInteractionListener?
     )
-    : RecyclerView.Adapter<MoviesRecyclerViewAdapter.BookViewHolder>()
+    : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MoviesViewHolder>()
     {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_movies, parent, false)
-        return BookViewHolder(view)
+        return MoviesViewHolder(view)
     }
 
-    /**
-     * This inner class lets us refer to all the different View elements
-     * (Yes, the same ones as in the XML layout files!)
-     */
-    inner class BookViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+
+    inner class MoviesViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
 
         var mItem: Movies? = null
-        //val mBookTitle: TextView = mView.findViewById<View>(id.book_title) as TextView
-        //val mBookAuthor: TextView = mView.findViewById<View>(id.book_author) as TextView
-        //val mBookRanking: TextView = mView.findViewById<View>(id.ranking) as TextView
-        //val mBookDescription: TextView = mView.findViewById<View>(id.book_description) as TextView
-        val mBookImage: ImageView = mView.findViewById<View>(id.book_image) as ImageView
-        //val mBookButton: Button = mView.findViewById<Button>(id.buy_button) as Button
+        val mTVImage: ImageView = mView.findViewById<View>(id.movies_image) as ImageView
 
-//        override fun toString(): String {
-//            //return mBookTitle.toString() + " '" + mBookAuthor.text + "'"
-//        }
     }
 
-    /**
-     * This lets us "bind" each Views in the ViewHolder to its' actual data!
-     */
-    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        val book = books[position]
 
-        holder.mItem = book
-        //holder.mBookTitle.text = book.title
-        //holder.mBookAuthor.text = book.author
-        //holder.mBookDescription.text = book.description
-        //holder.mBookRanking.text = book.rank.toString()
+    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+        val tv = movies[position]
+
+        holder.mItem = tv
+
 
         Glide.with(holder.mView)
-            .load( "https://image.tmdb.org/t/p/w500" + book.bookImageUrl)
+            .load( "https://image.tmdb.org/t/p/w500" + tv.moviesImageUrl)
             .centerInside()
-            .into(holder.mBookImage)
+            .into(holder.mTVImage)
 
         holder.mView.setOnClickListener {
-            holder.mItem?.let { book ->
-                mListener?.onItemClick(book)
+            holder.mItem?.let { tv ->
+                mListener?.onItemClick(tv)
             }
         }
-//        holder.mBookButton.setOnClickListener {
-//            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(book.amazonUrl))
-//            startActivity(it.context, browserIntent, null)
-//        }
+
     }
 
-    /**
-     * Remember: RecyclerView adapters require a getItemCount() method.
-     */
+
     override fun getItemCount(): Int {
-        return books.size
+        return movies.size
     }
 }

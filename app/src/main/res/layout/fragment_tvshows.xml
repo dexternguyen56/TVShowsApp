@@ -12,7 +12,7 @@
 
 
     <ImageView
-        android:id="@+id/movies_image"
+        android:id="@+id/tv_image"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:contentDescription="Book Cover Image"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_tv"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_tv_24"
+        android:title="@string/TVShows"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_movies"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_local_movies_24"
+        android:title="@string/Movies"
+        app:showAsAction="ifRoom" />
+
+</menu>
