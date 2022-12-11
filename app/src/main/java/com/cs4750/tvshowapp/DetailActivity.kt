@@ -1,6 +1,6 @@
 package com.cs4750.tvshowapp
 
-import android.graphics.Color
+
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,19 +16,22 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        var backDrop = intent.getStringExtra("backDrop")
-        var tvTitle= intent.getStringExtra("name")
-        var tvOverView= intent.getStringExtra("overview")
-        var firstAir = intent.getStringExtra("airDate")
-        var vote = intent.getStringExtra("voting")
+        //Get intents from the fragments
+        val backDrop = intent.getStringExtra("backDrop")
+        val tvTitle= intent.getStringExtra("name")
+        val tvOverView= intent.getStringExtra("overview")
+        val firstAir = intent.getStringExtra("airDate")
+        val vote = intent.getStringExtra("voting")
 
-
+        // Init SpannableStringBuilder() vals
         val des = SpannableStringBuilder()
         val res = SpannableStringBuilder()
         val voteSpan = SpannableStringBuilder()
 
+        // Spanning flag
         val spanFlag = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 
+        // Build the strings
         des.append("Description: ",StyleSpan(Typeface.BOLD), spanFlag)
         des.append(tvOverView)
 
@@ -38,21 +41,25 @@ class DetailActivity : AppCompatActivity() {
         voteSpan.append("Rating: ",StyleSpan(Typeface.BOLD), spanFlag)
         voteSpan.append(vote)
 
+        // Init elements
         val  tvBackdrop = findViewById<ImageView>(R.id.backdrop_imageView)
         val  tvName = findViewById<TextView>(R.id.title_textView)
         val  tvDescription = findViewById<TextView>(R.id.overview)
         val  firstAirTV = findViewById<TextView>(R.id.firstAir_textView)
         val  tvRating = findViewById<TextView>(R.id.voting)
 
-
+        // Glide
         Glide.with(this)
             .load( "https://image.tmdb.org/t/p/w500" + backDrop )
             .fitCenter()
             .into(tvBackdrop)
 
+
+        // Set title
         tvName.text = tvTitle
 //        tvName.setTextColor(Color.parseColor("#D24E08"))
 
+        // Replace the title with an empty string
         if(tvOverView.isNullOrBlank()){
             tvDescription.text = ""
         }
@@ -65,7 +72,7 @@ class DetailActivity : AppCompatActivity() {
 
         tvRating.text = voteSpan
 
-        // try block to hide Action bar
+        // try block to hide Action bar since we dont need it in this activity
         try {
             this.supportActionBar!!.hide()
         } // catch block to handle NullPointerException

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-
     <TextView
         android:textStyle="bold"
         android:textSize="19sp"
@@ -27,7 +26,6 @@
         android:layout_margin="5dp"
         android:background="@color/orange_light" />
 
-
     <ImageView
         android:id="@+id/backdrop_imageView"
         android:layout_width="match_parent"
@@ -37,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line"
         app:srcCompat="@drawable/ic_launcher_foreground" />
-
 
     <TextView
         android:id="@+id/overview"

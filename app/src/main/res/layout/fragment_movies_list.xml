@@ -11,10 +11,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        tools:context=".BestSellerBooksFragment"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_tvshows" />
-
 
 
     <androidx.core.widget.ContentLoadingProgressBar

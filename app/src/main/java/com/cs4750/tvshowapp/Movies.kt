@@ -8,7 +8,6 @@ class Movies {
     @SerializedName("poster_path")
     var moviesImageUrl: String? = null
 
-
     @SerializedName("overview")
     var description: String? = null
 
@@ -21,11 +20,8 @@ class Movies {
     @SerializedName("vote_average")
     var vote: Float? = null
 
-
     @JvmField
     @SerializedName("original_title")
     var title: String? = null
-
-
 
 }

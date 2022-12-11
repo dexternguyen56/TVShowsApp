@@ -8,17 +8,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Fragments inits
         val tvShowsFragment: Fragment = TVFragment()
         val moviesFragment: Fragment = MoviesFragment()
 
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        // bottom Navigation
+        val bottomNavigation: BottomNavigationView = findViewById(id.bottom_navigation)
 
-        // handle navigation selection
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        // navigation fragment
+        bottomNavigation.setOnItemSelectedListener { item ->
             lateinit var fragment: Fragment
             when (item.itemId) {
                 id.nav_tv -> fragment = tvShowsFragment
@@ -26,27 +29,26 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (fragment == tvShowsFragment){
-                setTitle("TV Shows")
+                title = "TV Shows"
 
             }
             else{
-                setTitle("Movies")
+                title = "Movies"
             }
             replaceFragment(fragment)
             true
         }
 
         // Set default selection
-        bottomNavigationView.selectedItemId = id.nav_tv
-
+        bottomNavigation.selectedItemId = id.nav_tv
 
     }
 
-    private fun replaceFragment(newFragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(id.frame_layout,newFragment)
-        fragmentTransaction.commit()
+    // This function will replace a different fragment with FragmentManager
+    private fun replaceFragment(newFragmentToReplace: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(id.frame_layout,newFragmentToReplace)
+        transaction.commit()
     }
 
 }

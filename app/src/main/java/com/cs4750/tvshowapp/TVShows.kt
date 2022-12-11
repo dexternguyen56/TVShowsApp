@@ -2,9 +2,7 @@ package com.cs4750.tvshowapp
 
 import com.google.gson.annotations.SerializedName
 
-
 class TVShows {
-
 
     @SerializedName("poster_path")
     var tvImageUrl: String? = null
@@ -20,7 +18,6 @@ class TVShows {
 
     @SerializedName("overview")
     var description: String? = null
-
 
     @JvmField
     @SerializedName("original_name")

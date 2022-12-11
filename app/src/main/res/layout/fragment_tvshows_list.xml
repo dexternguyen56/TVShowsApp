@@ -7,15 +7,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_tv"
-        android:name="com.codepath.bestsellerlistapp.BestSellerBooksFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        tools:context=".BestSellerBooksFragment"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_tvshows" />
-
 
 
     <androidx.core.widget.ContentLoadingProgressBar

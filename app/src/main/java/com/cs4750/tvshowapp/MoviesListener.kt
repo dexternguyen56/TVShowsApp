@@ -1,6 +1,5 @@
 package com.cs4750.tvshowapp
 
-
-interface OnListFragmentMoviesInteractionListener {
+interface MoviesListener {
     fun onItemClick(item: Movies)
 }

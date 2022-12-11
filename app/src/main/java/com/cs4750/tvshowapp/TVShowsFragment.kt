@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import okhttp3.Headers
+import org.json.JSONObject
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,16 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import okhttp3.Headers
-import org.json.JSONObject
 
 
-private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+private const val API_KEY = "d9fc7af46dde39facb004b8ec757f86b"
 
 
-class TVFragment : Fragment(), OnListFragmentInteractionListener {
+class TVFragment : Fragment(), TVShowsListener {
 
 
     override fun onCreateView(
@@ -42,14 +42,11 @@ class TVFragment : Fragment(), OnListFragmentInteractionListener {
     private fun updateAdapter(progressBar: ContentLoadingProgressBar, recyclerView: RecyclerView) {
         progressBar.show()
 
-
         val client = AsyncHttpClient()
         val params = RequestParams()
         params["api_key"] = API_KEY
 
         client[
-//                "https://api.themoviedb.org/3/tv/popular",
-
                 "https://api.themoviedb.org/3/tv/popular",
                 params,
                 object : JsonHttpResponseHandler()
@@ -65,26 +62,22 @@ class TVFragment : Fragment(), OnListFragmentInteractionListener {
 
                 val resultsJSON : JSONObject = json.jsonObject as JSONObject
 
-                val booksRawJSON : String = resultsJSON.get("results").toString()
+                val tvJSON : String = resultsJSON.get("results").toString()
 
-
-                val gson = Gson()
-                val arrayBookType = object : TypeToken<List<TVShows>>() {}.type
-                val models : List<TVShows> = gson.fromJson(booksRawJSON, arrayBookType)
-                recyclerView.adapter = TVShowsRecyclerViewAdapter(models, this@TVFragment)
+                val tvShowsType = object : TypeToken<List<TVShows>>() {}.type
+                val models : List<TVShows> = Gson().fromJson(tvJSON, tvShowsType)
+                recyclerView.adapter = TVShowsAdapter(models, this@TVFragment)
 
             }
 
-
+            // On failure
             override fun onFailure(
                 statusCode: Int,
                 headers: Headers?,
                 errorResponse: String,
                 t: Throwable?
             ) {
-
                 progressBar.hide()
-
             }
         }]
 
@@ -100,7 +93,6 @@ class TVFragment : Fragment(), OnListFragmentInteractionListener {
         i.putExtra("overview",item.description )
         i.putExtra("airDate",item.firstAir)
         i.putExtra("voting",item.vote.toString())
-
         startActivity(i)
     }
 
